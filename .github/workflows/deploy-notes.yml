@@ -6,7 +6,7 @@ on:
     branches:
     - main
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
+# This job installs dependencies, build the notes, and pushes it to `gh-pages`
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
@@ -35,11 +35,11 @@ jobs:
       run: |
          python3 -m pip install -r requirements.txt
 
-    # Build the book
-    - name: Build the book
+    # Build the notes
+    - name: Build the notes
       shell: bash -l {0}
       run: |
-        jupyter-book build book -vv
+        jupyter-book build notes -vv
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
