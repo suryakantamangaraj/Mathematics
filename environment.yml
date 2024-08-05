@@ -1,0 +1,10 @@
+name: me373-book
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - jupyter-book
+  - numpy
+  - scipy
+  - matplotlib
+  - sympy

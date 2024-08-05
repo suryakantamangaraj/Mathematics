@@ -1,0 +1,8 @@
+# Requirements for the demo notebooks
+# Useful for MyBinder configuration
+numpy
+scipy
+matplotlib
+jupyter-book
+sympy
+sphinx>=4.0,<5.0
