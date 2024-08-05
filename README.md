@@ -1,6 +1,6 @@
 # Mathematics
 
-Welcome to the **Mathematics** repository! My name is Surya Raj, and I'll be curating a collection of math-related notes and resources here. Whether you're a student, educator, or simply curious about mathematics, you've come to the right place.
+Welcome to the **Mathematics** repository! My name is [Surya Raj](https://suryaraj.me), and I'll be curating a collection of math-related notes and resources here. Whether you're a student, educator, or simply curious about mathematics, you've come to the right place.
 
 ## About This Repository
 
