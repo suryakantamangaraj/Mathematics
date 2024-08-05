@@ -1,12 +1,12 @@
-# ME373-book
+# Mathematics
 
-This repository contains an electronic textbook for the course ME 373, Mechanical Engineering Methods, taught at [Oregon State University](https://oregonstate.edu) by [Prof. Kyle Niemeyer](https://mime.oregonstate.edu/people/kyle-niemeyer).
+This repository contains an electronic notes for Math by [Surya](Link).
 
-The catalog description for this course is
-> Analytical and numerical methods for solving representative mechanical engineering problems.
+The catalog description for this note is
+> Will update.
 and the course learning objectives are:
 
-At the end of this course, students will be able to:
+will update
 
 1. Formulate and solve mechanical engineering initial value problems of practical interest represented by first and second order differential equations using both analytical and explicit numerical methods.
 2. Formulate and solve mechanical engineering boundary value problems of practical interest represented by first and second order differential equations using both analytical and explicit numerical methods.
