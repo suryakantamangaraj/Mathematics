@@ -1,0 +1,1041 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3. Numerical methods for 2nd-order ODEs &#8212; Mathematics Notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/second-order/numerical-methods';</script>
+    <link rel="canonical" href="https://suryaraj.me/Mathematics/content/second-order/numerical-methods.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.4. Fourier Series" href="fourier-series.html" />
+    <link rel="prev" title="2.2. Initial-Value Problems" href="initial-value-problems.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematics Notes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mechanical Engineering Methods
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../first-order.html">1. Solutions to 1st-order ODEs</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="second-order.html">2. Second-order Ordinary Differential Equations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytical.html">2.1. Analytical Solutions to 2nd-order ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial-value-problems.html">2.2. Initial-Value Problems</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.3. Numerical methods for 2nd-order ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fourier-series.html">2.4. Fourier Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power-series.html">2.5. Power Series Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../bvps/boundary-value-problems.html">3. Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bvps/shooting-method.html">3.1. Shooting Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bvps/finite-difference.html">3.2. Finite difference method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bvps/eigenvalue.html">3.3. Eigenvalue problems</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pdes/partial-differential-equations.html">4. Partial Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pdes/elliptic.html">4.1. Elliptic PDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pdes/parabolic.html">4.2. Parabolic PDEs</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://github.com/suryakantamangaraj/Mathematics/">GitHub repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing to Jupyter Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/suryakantamangaraj/Mathematics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/suryakantamangaraj/Mathematics/edit/master/notes/content/second-order/numerical-methods.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/suryakantamangaraj/Mathematics/issues/new?title=Issue%20on%20page%20%2Fcontent/second-order/numerical-methods.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/second-order/numerical-methods.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Numerical methods for 2nd-order ODEs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-odes">2.3.1. Higher-order ODEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mass-spring-problem">2.3.2. Example: mass-spring problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-euler">2.3.2.1. Forward Euler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heuns-method">2.3.2.2. Heun’s Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-kutta-method">2.3.2.3. Runge-Kutta method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-euler-for-2nd-order-odes">2.3.3. Backward Euler for 2nd-order ODEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cramers-rule">2.3.4. Cramer’s Rule</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="numerical-methods-for-2nd-order-odes">
+<h1><span class="section-number">2.3. </span>Numerical methods for 2nd-order ODEs<a class="headerlink" href="#numerical-methods-for-2nd-order-odes" title="Link to this heading">#</a></h1>
+<p>We’ve gone over how to solve 1st-order ODEs using numerical methods, but what about 2nd-order or any higher-order ODEs? We can use the same methods we’ve already discussed by transforming our higher-order ODEs into a <strong>system of first-order ODEs</strong>.</p>
+<p>Meaning, if we are given a 2nd-order ODE</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3f016874-8a24-490b-8eb6-d5e4980677a7">
+<span class="eqno">(2.53)<a class="headerlink" href="#equation-3f016874-8a24-490b-8eb6-d5e4980677a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{d^2 y}{dx^2} = y^{\prime\prime} = f(x, y, y^{\prime})
+\end{equation}\]</div>
+<p>we can transform this into a system of <strong>two 1st-order ODEs</strong> that are coupled:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-734e293c-0878-4149-aeef-9208226ee7c6">
+<span class="eqno">(2.54)<a class="headerlink" href="#equation-734e293c-0878-4149-aeef-9208226ee7c6" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{dy}{dx} &amp;= y^{\prime} = u \\
+\frac{du}{dx} &amp;= u^{\prime} = y^{\prime\prime} = f(x, y, u)
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x, y, u)\)</span> is the same as that given above for <span class="math notranslate nohighlight">\(\frac{d^2 y}{dx^2}\)</span>.</p>
+<p>Thus, instead of a 2nd-order ODE to solve, we have two 1st-order ODEs:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c8ff84ba-4f1f-4916-894a-e4d7b27c300a">
+<span class="eqno">(2.55)<a class="headerlink" href="#equation-c8ff84ba-4f1f-4916-894a-e4d7b27c300a" title="Permalink to this equation">#</a></span>\[\begin{align}
+y^{\prime} &amp;= u \\
+u^{\prime} &amp;= f(x, y, u)
+\end{align}\]</div>
+<p>So, we can use all of the methods we have talked about so far to solve 2nd-order ODEs by transforming the one equation into a system of two 1st-order equations.</p>
+<section id="higher-order-odes">
+<h2><span class="section-number">2.3.1. </span>Higher-order ODEs<a class="headerlink" href="#higher-order-odes" title="Link to this heading">#</a></h2>
+<p>This works for higher-order ODEs too! For example, if we have a 3rd-order ODE, we can transform it into a system of three 1st-order ODEs:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4e814ba7-2d48-4fb6-9c31-daee2adcacba">
+<span class="eqno">(2.56)<a class="headerlink" href="#equation-4e814ba7-2d48-4fb6-9c31-daee2adcacba" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{d^3 y}{dx^3} &amp;= f(x, y, y^{\prime}, y^{\prime\prime}) \\
+\rightarrow y^{\prime} &amp;= u \\
+u^{\prime} &amp;= y^{\prime\prime} = w \\
+w^{\prime} &amp;= y^{\prime\prime\prime} = f(x, y, u, w)
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries for numerical functions and plotting</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">300</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-mass-spring-problem">
+<h2><span class="section-number">2.3.2. </span>Example: mass-spring problem<a class="headerlink" href="#example-mass-spring-problem" title="Link to this heading">#</a></h2>
+<p>For example, let’s solve a forced damped mass-spring problem given by a 2nd-order ODE:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f282c0e1-03b3-43c6-a707-34f471bb7894">
+<span class="eqno">(2.57)<a class="headerlink" href="#equation-f282c0e1-03b3-43c6-a707-34f471bb7894" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y^{\prime\prime} + 5y^{\prime} + 6y = 10 \sin \omega t
+\end{equation}\]</div>
+<p>with the initial conditions <span class="math notranslate nohighlight">\(y(0) = 0\)</span> and <span class="math notranslate nohighlight">\(y^{\prime}(0) = 5\)</span>.</p>
+<p>We start by transforming the equation into two 1st-order ODEs. Let’s use the variables <span class="math notranslate nohighlight">\(z_1 = y\)</span> and <span class="math notranslate nohighlight">\(z_2 = y^{\prime}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-35f4acbc-f680-4ed2-bdd9-7dc519a435d7">
+<span class="eqno">(2.58)<a class="headerlink" href="#equation-35f4acbc-f680-4ed2-bdd9-7dc519a435d7" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{dz_1}{dt} &amp;= z_1^{\prime} = z_2 \\
+\frac{dz_2}{dt} &amp;= z_2^{\prime} = y^{\prime\prime} = 10 \sin \omega t - 5z_2 - 6z_1
+\end{align}\]</div>
+<section id="forward-euler">
+<h3><span class="section-number">2.3.2.1. </span>Forward Euler<a class="headerlink" href="#forward-euler" title="Link to this heading">#</a></h3>
+<p>Then, let’s solve numerically using the forward Euler method. Recall that the recursion formula for forward Euler is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-77134de8-9963-4959-81ec-38e5fe980ac1">
+<span class="eqno">(2.59)<a class="headerlink" href="#equation-77134de8-9963-4959-81ec-38e5fe980ac1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y_{i+1} = y_i + \Delta x f(x_i, y_i)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x,y) = \frac{dy}{dx}\)</span>.</p>
+<p>Let’s solve using <span class="math notranslate nohighlight">\(\omega = 1\)</span> and with a step size of <span class="math notranslate nohighlight">\(\Delta t = 0.1\)</span>, over <span class="math notranslate nohighlight">\(0 \leq t \leq 3\)</span>.</p>
+<p>We can compare this against the exact solution, obtainable using the method of undetermined coefficients:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7933efb4-1498-48c4-8531-342a04aaaa2e">
+<span class="eqno">(2.60)<a class="headerlink" href="#equation-7933efb4-1498-48c4-8531-342a04aaaa2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y(t) = -6 e^{-3t} + 7 e^{-2t} + \sin t - \cos t
+\end{equation}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot exact solution first</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> 
+    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+
+<span class="n">omega</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.001</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">z1</span><span class="p">,</span><span class="n">z2</span><span class="p">:</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z2</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">z1</span>
+
+<span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="c1"># initial conditions</span>
+<span class="n">z1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">z2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Forward Euler iterations</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="s1">&#39;o--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Euler solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2fba58d825c7179f562bcb3308ede24601642cbb7cbeb7d8fc1262badf86c24c.png" src="../../_images/2fba58d825c7179f562bcb3308ede24601642cbb7cbeb7d8fc1262badf86c24c.png" />
+</div>
+</div>
+<p>Since the method is only first-order accurate, we see both qualitative and quantiative differences compared with the exact solution, but the overall solution agrees. We can use more-accurate methods to better-capture the exact solution.</p>
+</section>
+<section id="heuns-method">
+<h3><span class="section-number">2.3.2.2. </span>Heun’s Method<a class="headerlink" href="#heuns-method" title="Link to this heading">#</a></h3>
+<p>For schemes that involve more than one stage, like Heun’s method, we’ll need to implement both stages for each 1st-order ODE. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot exact solution first</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> 
+    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+
+<span class="n">omega</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.001</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">z1</span><span class="p">,</span><span class="n">z2</span><span class="p">:</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z2</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">z1</span>
+
+<span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="c1"># initial conditions</span>
+<span class="n">z1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">z2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Forward Euler iterations</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="c1"># predictor</span>
+    <span class="n">z1p</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">z2p</span> <span class="o">=</span> <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    
+    <span class="c1"># corrector</span>
+    <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">z2p</span><span class="p">)</span>
+    <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z1</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">z2</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">z1p</span><span class="p">,</span> <span class="n">z2p</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="s1">&#39;o--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Heuns method solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;displacement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b126186e55f14c7742f7a722de0229ae04555aa2f54f041ebb7b63bdcaf78db8.png" src="../../_images/b126186e55f14c7742f7a722de0229ae04555aa2f54f041ebb7b63bdcaf78db8.png" />
+</div>
+</div>
+<p>As expected, the numerical solution using Heun’s method agrees much more closely to the exact solution (vs. forward Euler), though we can still see some error due to the relatively large step size.</p>
+</section>
+<section id="runge-kutta-method">
+<h3><span class="section-number">2.3.2.3. </span>Runge-Kutta method<a class="headerlink" href="#runge-kutta-method" title="Link to this heading">#</a></h3>
+<p>We can also solve using the 4th-order Runge–Kutta method available through the <code class="docutils literal notranslate"><span class="pre">solve_ivp()</span></code> function, by providing a function that defines the system of first-order ODEs.</p>
+<p>Since there are technically two variables being integrated (<span class="math notranslate nohighlight">\(z_1\)</span> representing <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z_2\)</span> representing <span class="math notranslate nohighlight">\(y^{\prime}\)</span>), the solution object contained in <code class="docutils literal notranslate"><span class="pre">sol.y</span></code> will be a two-dimensional array.</p>
+<p>The first column, <code class="docutils literal notranslate"><span class="pre">sol.y[0,:]</span></code>, will contain <span class="math notranslate nohighlight">\(y\)</span> and the second column, <code class="docutils literal notranslate"><span class="pre">sol.y[1,;]</span></code>, will contain <span class="math notranslate nohighlight">\(y^{\prime}\)</span>. We are typically mostly interested in the solution to <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># plot exact solution first</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">-</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="mi">7</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> 
+    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">mass_spring</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function providing dz/dt derivative system&#39;&#39;&#39;</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="mi">1</span>    
+    <span class="k">return</span> <span class="p">[</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">mass_spring</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;RK45&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> 
+    <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RK45 (solve_ivp)&#39;</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2bf2f025de298029e224ef600f87bdd0c964bdc1a835697531e676f71642bd39.png" src="../../_images/2bf2f025de298029e224ef600f87bdd0c964bdc1a835697531e676f71642bd39.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="backward-euler-for-2nd-order-odes">
+<h2><span class="section-number">2.3.3. </span>Backward Euler for 2nd-order ODEs<a class="headerlink" href="#backward-euler-for-2nd-order-odes" title="Link to this heading">#</a></h2>
+<p>We saw how to implement the Backward Euler method for a 1st-order ODE, but what about a 2nd-order ODE? (Or in general a system of 1st-order ODEs?)</p>
+<p>The recursion formula is the same, except now our dependent variable is an array/vector:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-35578e60-b622-443b-957d-768e472c3e69">
+<span class="eqno">(2.61)<a class="headerlink" href="#equation-35578e60-b622-443b-957d-768e472c3e69" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbf{y}_{i+1} = \mathbf{y}_i + \Delta t \, \mathbf{f} \left( t_{i+1} , \mathbf{y}_{i+1} \right)
+\end{equation}\]</div>
+<p>where the bolded <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> indicate array quantities (in other words, they hold more than one value).</p>
+<p>In general, we can use Backward Euler to solve 2nd-order ODEs in a similar fashion as our other numerical methods:</p>
+<ol class="arabic simple">
+<li><p>Convert the 2nd-order ODE into a system of two 1st-order ODEs</p></li>
+<li><p>Insert the ODEs into the Backward Euler recursion formula and solve for <span class="math notranslate nohighlight">\(\mathbf{y}_{i+1}\)</span></p></li>
+</ol>
+<p>The main difference is that we will now have a system of two equations and two unknowns: <span class="math notranslate nohighlight">\(y_{1, i+1}\)</span> and <span class="math notranslate nohighlight">\(y_{2, i+1}\)</span>.</p>
+<p>Let’s demonstrate with an example:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5040f72a-ebb2-4e22-b7d4-46d6b6f5d63b">
+<span class="eqno">(2.62)<a class="headerlink" href="#equation-5040f72a-ebb2-4e22-b7d4-46d6b6f5d63b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y^{\prime\prime} + 6 y^{\prime} + 5y = 10 \quad y(0) = 0 \quad y^{\prime}(0) = 5
+\end{equation}\]</div>
+<p>where the exact solution is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1fd08c15-98d8-4971-a886-00bc0b1ba27e">
+<span class="eqno">(2.63)<a class="headerlink" href="#equation-1fd08c15-98d8-4971-a886-00bc0b1ba27e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y(t) = -\frac{3}{4} e^{-5t} - \frac{5}{4} e^{-t} + 2
+\end{equation}\]</div>
+<p>To solve numerically,</p>
+<ol class="arabic simple">
+<li><p>Convert the 2nd-order ODE into a system of two 1st-order ODEs:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight" id="equation-643e5960-cea5-4580-a256-97a048aaa883">
+<span class="eqno">(2.64)<a class="headerlink" href="#equation-643e5960-cea5-4580-a256-97a048aaa883" title="Permalink to this equation">#</a></span>\[\begin{gather}
+y_1 = y \quad y_1(t=0) = 0 \\
+y_2 = y^{\prime} \quad y_2 (t=0) = 5
+\end{gather}\]</div>
+<p>Then, for the derivatives of these variables:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e0470922-b2fa-49cf-9bd8-4530d24d6c2c">
+<span class="eqno">(2.65)<a class="headerlink" href="#equation-e0470922-b2fa-49cf-9bd8-4530d24d6c2c" title="Permalink to this equation">#</a></span>\[\begin{align}
+y_1^{\prime} &amp;= y_2 \\
+y_2^{\prime} &amp;= 10 - 6 y_2 - 5 y_1
+\end{align}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Then plug these derivatives into the Backward Euler recursion formulas and solve for <span class="math notranslate nohighlight">\(y_{1,i+1}\)</span> and <span class="math notranslate nohighlight">\(y_{2,i+1}\)</span>:</p></li>
+</ol>
+<div class="amsmath math notranslate nohighlight" id="equation-a139a293-1b6b-4489-80bc-b34bbe1c4a09">
+<span class="eqno">(2.66)<a class="headerlink" href="#equation-a139a293-1b6b-4489-80bc-b34bbe1c4a09" title="Permalink to this equation">#</a></span>\[\begin{align}
+y_{1, i+1} &amp;= y_{1, i} + \Delta t \, y_{2,i+1} \\
+y_{2, i+1} &amp;= y_{2, i} + \Delta t \left( 10 - 6 y_{2, i+1} - 5 y_{1,i+1} \right) \\
+\rightarrow y_{1, i+1} - \Delta t \, y_{2, i+1} &amp;= y_{1,i} \\
+5 \Delta t \, y_{1, i+1} + (1 + 6 \Delta t) y_{2, i+1} &amp;= y_{2,i} + 10 \Delta t
+\end{align}\]</div>
+<p>or, represented as a product of a coefficient matrix and a vector:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b7feeb48-8f86-4178-b12b-1f6fa7a8c80e">
+<span class="eqno">(2.67)<a class="headerlink" href="#equation-b7feeb48-8f86-4178-b12b-1f6fa7a8c80e" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{bmatrix} 1 &amp; -\Delta t \\ 5 \Delta t &amp; (1+6\Delta t)\end{bmatrix} 
+\begin{bmatrix} y_{1, i+1} \\ y_{2, i+1} \end{bmatrix} &amp;= 
+\begin{bmatrix} y_{1,i} \\ y_{2,i} + 10 \Delta t \\ \end{bmatrix} \\
+\mathbf{A} \mathbf{y}_{i+1} &amp;= \mathbf{b}
+\end{align}\]</div>
+<p>To isolate <span class="math notranslate nohighlight">\(\mathbf{y}_{i+1}\)</span> and get a usable recursion formula, we need to solve this system of two equations. We could solve this by hand using the substitution method, or we can use Cramer’s rule:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6de55c01-9456-46e6-95f9-51689ccb7c6d">
+<span class="eqno">(2.68)<a class="headerlink" href="#equation-6de55c01-9456-46e6-95f9-51689ccb7c6d" title="Permalink to this equation">#</a></span>\[\begin{align}
+y_{1, i+1} &amp;= \frac{ y_{1,i} (1 + 6 \Delta t) + \Delta t \left( y_{2,i} + 10 \Delta t \right)}{1 + 6 \Delta t + 5 \Delta t^2} \\
+y_{2, i+1} &amp;= \frac{ y_{2,i} + 10 \Delta t - 5 \Delta t y_{1,i}}{1 + 6 \Delta t + 5 \Delta t^2}
+\end{align}\]</div>
+<p>Let’s confirm that this gives us a good, well-behaved numerical solution and compare with the Forward Euler method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exact solution</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.75</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.25</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">5.001</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+<span class="c1"># Forward Euler</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">:</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">y2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">y1</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">y1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Euler&#39;</span><span class="p">)</span>
+
+<span class="c1"># Backward Euler</span>
+<span class="c1"># use a single array to contain both variables being integrated</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">dt</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">dt</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">dt</span> <span class="o">-</span> <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="n">dt</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Euler&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s1">&#39;Maximum error of Forward Euler: &#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s1">&#39;Maximum error of Forward Euler: &#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_vals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/57e41ab14abf0bab4cc1852a8f377a1d17097ee77e771643bae059dbc7c8ccdd.png" src="../../_images/57e41ab14abf0bab4cc1852a8f377a1d17097ee77e771643bae059dbc7c8ccdd.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum error of Forward Euler:  0.099
+Maximum error of Forward Euler:  0.068
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, for <span class="math notranslate nohighlight">\(\Delta t = 0.1\)</span>, we see that the Forward and Backward Euler methods give an error <span class="math notranslate nohighlight">\(\mathcal{O}(\Delta t)\)</span>, as expected since both methods are <em>first-order</em> accurate.</p>
+<p>Let’s see how they compare for a larger step size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exact solution</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.75</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.25</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">5.001</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+<span class="c1"># Forward Euler</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">:</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">y2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">y1</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+<span class="n">y1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">y2</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Euler&#39;</span><span class="p">)</span>
+
+<span class="c1"># Backward Euler</span>
+<span class="c1"># use a single array to contain both variables being integrated</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">dt</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">dt</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">6</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">dt</span> <span class="o">-</span> <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="n">dt</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">denom</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Euler&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s1">&#39;Maximum error of Forward Euler: &#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s1">&#39;Maximum error of Backward Euler: &#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_vals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/63916db9d7d564e380a32e35f227df05e610cb4a44315e982af74e54b57579c8.png" src="../../_images/63916db9d7d564e380a32e35f227df05e610cb4a44315e982af74e54b57579c8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum error of Forward Euler:  43.242
+Maximum error of Backward Euler:  0.228
+</pre></div>
+</div>
+</div>
+</div>
+<p>Backward Euler, since it is unconditionally stable, remains well-behaved at this larger step size, while the Forward Euler method blows up.</p>
+<p>One other thing: instead of using Cramer’s rule to get expressions for <span class="math notranslate nohighlight">\(y_{1,i+1}\)</span> and <span class="math notranslate nohighlight">\(y_{2,i+1}\)</span>, we could instead use built-in linear algebra routines to solve the linear system of equations at each time step, using the function <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html"><code class="docutils literal notranslate"><span class="pre">np.linalg.solve()</span></code></a>.</p>
+<p>To do that, we could replace it with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span>  <span class="o">-</span><span class="n">dt</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">6</span><span class="o">*</span><span class="n">dt</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">10</span><span class="o">*</span><span class="n">dt</span><span class="p">])</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s confirm that this gives the same answer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exact solution</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">y_exact</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.75</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.25</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_exact</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact&#39;</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">5.001</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+<span class="c1"># Backward Euler</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>  <span class="o">-</span><span class="n">dt</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">6</span><span class="o">*</span><span class="n">dt</span><span class="p">]])</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">10</span><span class="o">*</span><span class="n">dt</span><span class="p">])</span>
+    <span class="n">y_vals</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Euler&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bab53066823fe7ca8ba283091365b6bc877904f670b1dce38085400536e42e04.png" src="../../_images/bab53066823fe7ca8ba283091365b6bc877904f670b1dce38085400536e42e04.png" />
+</div>
+</div>
+</section>
+<section id="cramers-rule">
+<h2><span class="section-number">2.3.4. </span>Cramer’s Rule<a class="headerlink" href="#cramers-rule" title="Link to this heading">#</a></h2>
+<p>Cramer’s Rule provides a solution method for a system of linear equations, where the number of equations equals the number of unknowns. It works for any number of equations/unknowns, but isn’t really practical for more than two or three. We’ll focus on using it for a system of two equations, with two unknowns <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4c985c51-2623-473d-929b-e1d805b8a399">
+<span class="eqno">(2.69)<a class="headerlink" href="#equation-4c985c51-2623-473d-929b-e1d805b8a399" title="Permalink to this equation">#</a></span>\[\begin{gather}
+a_{11} x_1 + a_{12} x_2 = b_1 \\
+a_{21} x_1 + a_{22} x_2 = b_2 \\
+\text{or } \mathbf{A} \mathbf{x} = \mathbf{b}
+\end{gather}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d70a6c3f-c072-4c7a-9e50-5977ddd2e4d5">
+<span class="eqno">(2.70)<a class="headerlink" href="#equation-d70a6c3f-c072-4c7a-9e50-5977ddd2e4d5" title="Permalink to this equation">#</a></span>\[\begin{gather}
+\mathbf{A} = \begin{bmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{bmatrix} \\
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \\
+\mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}
+\end{gather}\]</div>
+<p>The solutions for the unknowns are then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-808acbcc-2417-491d-a0e2-d64621e18ab3">
+<span class="eqno">(2.71)<a class="headerlink" href="#equation-808acbcc-2417-491d-a0e2-d64621e18ab3" title="Permalink to this equation">#</a></span>\[\begin{align}
+x_1 &amp;= \frac{ \begin{vmatrix} b_1 &amp; a_{12} \\ b_2 &amp; a_{22} \end{vmatrix} }{D} = \frac{b_1 a_{22} - a_{12} b_2}{D} \\
+x_2 &amp;= \frac{ \begin{vmatrix} a_{11} &amp; b_1 \\ a_{21} &amp; b_2 \end{vmatrix} }{D} = \frac{a_{11} b_2 - b_1 a_{21}}{D}
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> is the determinant of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-24eb71d5-4ad2-4b51-b581-a6458d14be73">
+<span class="eqno">(2.72)<a class="headerlink" href="#equation-24eb71d5-4ad2-4b51-b581-a6458d14be73" title="Permalink to this equation">#</a></span>\[\begin{equation}
+D = \det(\mathbf{A}) = \begin{vmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{vmatrix} = a_{11} a_{22} - a_{12} a_{21}
+\end{equation}\]</div>
+<p>This works as long as the determinant does not equal zero.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/second-order"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="initial-value-problems.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.2. </span>Initial-Value Problems</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fourier-series.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.4. </span>Fourier Series</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#higher-order-odes">2.3.1. Higher-order ODEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mass-spring-problem">2.3.2. Example: mass-spring problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-euler">2.3.2.1. Forward Euler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heuns-method">2.3.2.2. Heun’s Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-kutta-method">2.3.2.3. Runge-Kutta method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-euler-for-2nd-order-odes">2.3.3. Backward Euler for 2nd-order ODEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cramers-rule">2.3.4. Cramer’s Rule</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Surya
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text"><a rel="cc:attributionURL" property="dct:title" href="https://github.com/suryakantamangaraj/Mathematics">Mathematics Notes</a> by <span property="cc:attributionName">Surya Raj</span> is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" /></a></p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

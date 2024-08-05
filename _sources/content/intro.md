@@ -1,0 +1,16 @@
+# Mechanical Engineering Methods
+
+**By [Surya Raj](https://suryaraj.me)**
+
+This notes contain material and example problems in numerical methods for engineering, in the format of Jupyter notebooks, developed to supplement the Mathematics.
+
+All problems here use Python with the [NumPy](https://numpy.org) {cite:p}`vanderWalt2011` and [SciPy](https://www.scipy.org) ecosystem of packages {cite:p}`2020SciPy-NMeth`.
+All artwork here is original.
+This interactive website is powered by [Jupyter Book](https://jupyterbook.org/).
+
+
+[![license](../images/cc-by.svg)](https://creativecommons.org/licenses/by/4.0/)
+<br />
+This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+Test Push

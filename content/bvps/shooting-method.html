@@ -1,0 +1,869 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.1. Shooting Method &#8212; Mathematics Notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/bvps/shooting-method';</script>
+    <link rel="canonical" href="https://suryaraj.me/Mathematics/content/bvps/shooting-method.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. Finite difference method" href="finite-difference.html" />
+    <link rel="prev" title="3. Boundary Value Problems" href="boundary-value-problems.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Mathematics Notes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mechanical Engineering Methods
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../first-order.html">1. Solutions to 1st-order ODEs</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../second-order/second-order.html">2. Second-order Ordinary Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../second-order/analytical.html">2.1. Analytical Solutions to 2nd-order ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../second-order/initial-value-problems.html">2.2. Initial-Value Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../second-order/numerical-methods.html">2.3. Numerical methods for 2nd-order ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../second-order/fourier-series.html">2.4. Fourier Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../second-order/power-series.html">2.5. Power Series Solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="boundary-value-problems.html">3. Boundary Value Problems</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.1. Shooting Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finite-difference.html">3.2. Finite difference method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eigenvalue.html">3.3. Eigenvalue problems</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pdes/partial-differential-equations.html">4. Partial Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pdes/elliptic.html">4.1. Elliptic PDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pdes/parabolic.html">4.2. Parabolic PDEs</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://github.com/suryakantamangaraj/Mathematics/">GitHub repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing to Jupyter Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/suryakantamangaraj/Mathematics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/suryakantamangaraj/Mathematics/edit/master/notes/content/bvps/shooting-method.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/suryakantamangaraj/Mathematics/issues/new?title=Issue%20on%20page%20%2Fcontent/bvps/shooting-method.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/bvps/shooting-method.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Shooting Method</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-ode">3.1.1. Example: linear ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nonlinear-ode">3.1.2. Example: nonlinear ODE</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="shooting-method">
+<h1><span class="section-number">3.1. </span>Shooting Method<a class="headerlink" href="#shooting-method" title="Link to this heading">#</a></h1>
+<p>Boundary-value problems are also ordinary differential equations—the difference is that our two constraints are at boundaries of the domain, rather than both being at the starting point.</p>
+<p>For example, consider the ODE</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4fcf30e5-20eb-4ebd-ad5b-69a91ddafaa4">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-4fcf30e5-20eb-4ebd-ad5b-69a91ddafaa4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y^{\prime\prime} + xy^{\prime} - xy = 2x
+\end{equation}\]</div>
+<p>with the boundary conditions <span class="math notranslate nohighlight">\(y(0)=1\)</span> and <span class="math notranslate nohighlight">\(y(2)=8\)</span>.</p>
+<p>The numerical methods we have already discussed (e.g., Forward Euler, Runge-Kutta) require values of <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(y^{\prime}\)</span> at the starting point, <span class="math notranslate nohighlight">\(x=0\)</span>. So we can’t use these directly because we are missing <span class="math notranslate nohighlight">\(y^{\prime}(0)\)</span>.</p>
+<p>But, what if we could <em>guess</em> a value for the missing initial condition, then integrate towards the second boundary condition using one of our familiar numerical methods, and then adjust our guess if necessary and repeat? This concept is the <strong>shooting method</strong>.</p>
+<p>The shooting method algorithm is:</p>
+<ol class="arabic simple">
+<li><p>Guess a value of the missing initial condition; in this case, that is <span class="math notranslate nohighlight">\(y'(0)\)</span>.</p></li>
+<li><p>Integrate the ODE like an initial-value problem, using our existing numerical methods, to get the given boundary condition(s); in this case, that is <span class="math notranslate nohighlight">\(y(L)\)</span>.</p></li>
+<li><p>Assuming your trial solution for <span class="math notranslate nohighlight">\(y(L)\)</span> does not match the given boundary condition, adjust your guess for <span class="math notranslate nohighlight">\(y'(0)\)</span> and repeat.</p></li>
+</ol>
+<p>Now, this algorithm will not work particularly well if all your guesses are random/uninformed. Fortunately, we can use linear interpolation to inform a third guess based on two initial attempts:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-daa440ca-c6ea-47f6-9704-c7b9d05ca3b4">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-daa440ca-c6ea-47f6-9704-c7b9d05ca3b4" title="Permalink to this equation">#</a></span>\[\begin{align}
+\text{guess 3} &amp;= \text{guess 2} + m \left( \text{target} - \text{solution 2} \right) \\
+m &amp;= \frac{\text{guess 1} - \text{guess 2}}{\text{solution 1} - \text{solution 2}}
+\end{align}\]</div>
+<p>where “target” is the target boundary condition—in this case, <span class="math notranslate nohighlight">\(y(L)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries for numerical functions and plotting</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">300</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-linear-ode">
+<h2><span class="section-number">3.1.1. </span>Example: linear ODE<a class="headerlink" href="#example-linear-ode" title="Link to this heading">#</a></h2>
+<p>Let’s try solving the given ODE using the shooting method:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2054d54c-5643-4164-b90d-598f7492fe08">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-2054d54c-5643-4164-b90d-598f7492fe08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+y^{\prime\prime} + xy^{\prime} - xy = 2x
+\end{equation}\]</div>
+<p>with the boundary conditions <span class="math notranslate nohighlight">\(y(0)=1\)</span> and <span class="math notranslate nohighlight">\(y(2)=8\)</span>.</p>
+<p>First, we need to convert this 2nd-order ODE into a system of two 1st-order ODEs, where we can define <span class="math notranslate nohighlight">\(u = y'\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c0ebbd50-03b1-4df3-a470-75dce9f89b12">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-c0ebbd50-03b1-4df3-a470-75dce9f89b12" title="Permalink to this equation">#</a></span>\[\begin{align}
+y' &amp;= u \\
+u' &amp;= 2x + xy - xu
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shooting_rhs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function for dy/dx derivatives&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="c1"># target boundary condition</span>
+<span class="n">target</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># pick a guess for y&#39;(0)</span>
+<span class="n">guess1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sol1</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">shooting_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">guess1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Solution 1: </span><span class="si">{</span><span class="n">sol1</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># pick a second guess for y&#39;(0)</span>
+<span class="n">guess2</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">sol2</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">shooting_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">guess2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Solution 2: </span><span class="si">{</span><span class="n">sol2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># now use linear interpolation to find a new guess</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">guess1</span> <span class="o">-</span> <span class="n">guess2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sol1</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sol2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">guess3</span> <span class="o">=</span> <span class="n">guess2</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">sol2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Guess 3:    </span><span class="si">{</span><span class="n">guess3</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">sol3</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">shooting_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">guess3</span><span class="p">],</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Solution 3: </span><span class="si">{</span><span class="n">sol3</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Target:     </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol3</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol3</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solution 1:  6.00
+Solution 2:  11.96
+Guess 3:     2.01
+Solution 3:  8.00
+Target:      8.00
+</pre></div>
+</div>
+<img alt="../../_images/0728abbe22e30fcfaa367723b48d829c1809e5f84ac0d00f5b50133509964f9a.png" src="../../_images/0728abbe22e30fcfaa367723b48d829c1809e5f84ac0d00f5b50133509964f9a.png" />
+</div>
+</div>
+<p>As you can see, using linear interpolation, we are able to find the correct guess for the missing initial condition <span class="math notranslate nohighlight">\(y'(0)\)</span> with in just three steps. This works so well because this is a <em>linear</em> ODE. If we had a nonlinear ODE, it would take more tries, as we’ll see shortly.</p>
+</section>
+<section id="example-nonlinear-ode">
+<h2><span class="section-number">3.1.2. </span>Example: nonlinear ODE<a class="headerlink" href="#example-nonlinear-ode" title="Link to this heading">#</a></h2>
+<p>We can use the shooting method to solve a famous fluids problem: the <a class="reference external" href="https://en.wikipedia.org/wiki/Blasius_boundary_layer">Blasius boundary layer</a>.</p>
+<figure class="align-default" id="fig-boundary-layer">
+<a class="bg-white mb-1 reference internal image-reference" href="images/boundary-layer.png"><img alt="Laminar boundary layer, from https://commons.wikimedia.org/wiki/File:Laminar_boundary_layer_scheme.svg" class="bg-white mb-1" src="images/boundary-layer.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Laminar boundary layer, taken from <a class="reference external" href="https://commons.wikimedia.org/wiki/File:Laminar_boundary_layer_scheme.svg">https://commons.wikimedia.org/wiki/File:Laminar_boundary_layer_scheme.svg</a></span><a class="headerlink" href="#fig-boundary-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To get to a solveable ODE, we start with the conservation of momentum equation (i.e., Navier–Stokes equation) in the <span class="math notranslate nohighlight">\(x\)</span>-direction:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dd8c1f50-9dfd-41e9-9d55-62ab4c1ec2dd">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-dd8c1f50-9dfd-41e9-9d55-62ab4c1ec2dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} = \nu \frac{\partial^2 u}{\partial y^2}
+\end{equation}\]</div>
+<p>and the conservation of mass equation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4fefc056-84e9-43f0-9e45-378994f25e5f">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-4fefc056-84e9-43f0-9e45-378994f25e5f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0 \;,
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u\)</span> is the velocity component in the <span class="math notranslate nohighlight">\(x\)</span>-direction, <span class="math notranslate nohighlight">\(v\)</span> is the velocity component in the <span class="math notranslate nohighlight">\(y\)</span>-direction, and <span class="math notranslate nohighlight">\(\nu\)</span> is the fluid’s kinematic viscosity. The boundary conditions are that <span class="math notranslate nohighlight">\(u = v = 0\)</span> at <span class="math notranslate nohighlight">\(y=0\)</span>, and that <span class="math notranslate nohighlight">\(u = U_{\infty}\)</span> as <span class="math notranslate nohighlight">\(y \rightarrow \infty\)</span>, where <span class="math notranslate nohighlight">\(U_{\infty}\)</span> is the free-stream velocity.</p>
+<p>Blasius solved this problem by converting the PDE into an ODE, by recognizing that the boundary layer thickness is given by <span class="math notranslate nohighlight">\(\delta(x) \sim \sqrt{\frac{x \nu}{U_{\infty}}}\)</span>, and then nondimensionalizing the position coordinates using a similarity variable</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0edf3d12-fdbc-46eb-a252-224646136e12">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-0edf3d12-fdbc-46eb-a252-224646136e12" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\eta = y \sqrt{\frac{U_{\infty}}{2 \nu x}}
+\end{equation}\]</div>
+<p>By introducing the stream function, <span class="math notranslate nohighlight">\(\psi (x,y)\)</span>, we can ensure the continuity equation is satisfied:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-16df2900-495b-4880-ae1d-8090e3ec69e2">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-16df2900-495b-4880-ae1d-8090e3ec69e2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+u = \frac{\partial \psi}{\partial y} \;, \quad v = -\frac{\partial \psi}{\partial x}
+\end{equation}\]</div>
+<p>Let’s check this, using SymPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="n">sym</span><span class="o">.</span><span class="n">init_printing</span><span class="p">()</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y u v&#39;</span><span class="p">)</span>
+
+<span class="c1"># Streamfunction</span>
+<span class="n">psi</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;psi&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Define u and v based on the streamfunction</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="n">psi</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Check the continuity equation:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">v</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the boundary layer thickness and free-stream velocity, we can define the dimensionlesss stream function <span class="math notranslate nohighlight">\(f(\eta)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a676b3e1-2bfb-4f76-8592-88b6153d9c6c">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-a676b3e1-2bfb-4f76-8592-88b6153d9c6c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(\eta) = \frac{\psi}{U_{\infty}} \sqrt{\frac{U_{\infty}}{2 \nu x}}
+\end{equation}\]</div>
+<p>which relates directly to the velocity components:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-07a8434d-ddfc-4725-98e5-90e23474b2a1">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-07a8434d-ddfc-4725-98e5-90e23474b2a1" title="Permalink to this equation">#</a></span>\[\begin{align}
+u &amp;= \frac{\partial \psi}{\partial y} = \frac{\partial \psi}{\partial f} \frac{\partial f}{\partial \eta} \frac{\partial \eta}{\partial y} \\
+ &amp;= U_{\infty} \sqrt{\frac{2 \nu x}{U_{\infty}}} \cdot f^{\prime}(\eta) \cdot \sqrt{\frac{U_{\infty}}{2 \nu x}} \\
+u &amp;= U_{\infty} f^{\prime} (\eta) \\
+v &amp;= -\frac{\partial \psi}{\partial x} = -\left( \frac{\partial \psi}{\partial x} + \frac{\partial \psi}{\partial \eta} \frac{\partial \eta}{\partial x} \right) \\
+ &amp;= \sqrt{\frac{\nu U_{\infty}}{2x}} \left( \eta f^{\prime} - f \right)
+\end{align}\]</div>
+<p>We can insert these into the <span class="math notranslate nohighlight">\(x\)</span>-momentum equation, which leads to an ODE for the dimensionless stream function <span class="math notranslate nohighlight">\(f(\eta)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-164e0ac7-bdef-4c81-b902-00f35ab62b67">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-164e0ac7-bdef-4c81-b902-00f35ab62b67" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f^{\prime\prime\prime} + f f^{\prime\prime} = 0 \;,
+\end{equation}\]</div>
+<p>with the boundary conditions <span class="math notranslate nohighlight">\(f = f^{\prime} = 0\)</span> at <span class="math notranslate nohighlight">\(\eta = 0\)</span>, and <span class="math notranslate nohighlight">\(f^{\prime} = 1\)</span> as <span class="math notranslate nohighlight">\(\eta \rightarrow \infty\)</span>.</p>
+<p>This is a 3rd-order ODE, which we can solve by converting it into three 1st-order ODEs:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e7318997-c47e-4900-867e-ee787b6dd5f4">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-e7318997-c47e-4900-867e-ee787b6dd5f4" title="Permalink to this equation">#</a></span>\[\begin{align}
+y_1 &amp;= f \quad y_1^{\prime} = y_2 \\
+y_2 &amp;= f^{\prime} \quad y_2^{\prime} = y_3 \\
+y_3 &amp;= f^{\prime\prime} \quad y_3^{\prime} = -y_1 y_3
+\end{align}\]</div>
+<p>and we can use the shooting method to solve by recognizing that we have two initial conditions, <span class="math notranslate nohighlight">\(y_1(0) = y_2(0) = 0\)</span>, and are missing <span class="math notranslate nohighlight">\(y_3(0)\)</span>. We also have a target boundary condition: <span class="math notranslate nohighlight">\(y_2(\infty) = 1\)</span>.</p>
+<p>(Note: obviously we cannot truly integrate over <span class="math notranslate nohighlight">\(0 \leq \eta &lt; \infty\)</span>. Instead, we just need to choose a large enough number. In this case, using 10 is sufficient.)</p>
+<p>First, let’s try the same three-step approach we used for the simpler example, taking two guesses and then using linear interpolation to find a third guess:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">blasius_rhs</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Derivative function for Blasius problem&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">solutions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">guesses</span><span class="p">)</span>
+
+<span class="n">guesses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">blasius_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">solutions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">blasius_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">solutions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">guesses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">solutions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">solutions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">guesses</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">solutions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">blasius_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">solutions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tries guesses  solutions&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">guesses</span><span class="p">,</span> <span class="n">solutions</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">idx</span><span class="si">:</span><span class="s1">3d</span><span class="si">}</span><span class="s1">   </span><span class="si">{</span><span class="n">g</span><span class="si">:</span><span class="s1">6.4f</span><span class="si">}</span><span class="s1">    </span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s1">6.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Target: </span><span class="si">{</span><span class="n">target</span><span class="si">:</span><span class="s1"> 5.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tries guesses  solutions
+  0   1.0000    1.6554
+  1   0.1000    0.3567
+  2   0.5458    1.1056
+Target:  1.000
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, for this problem, using linear interpolation did <em>not</em> get us the correct solution on the third try. This is because the ODE is nonlinear. But, you can see that we are converging towards the correct solution—it will just take more tries.</p>
+<p>Rather than manually take an unknown (and potentially large) number of guesses, let’s automate this with a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># use a list to store the values of guesses and solutions</span>
+<span class="c1"># (For real problems this isn&#39;t really necessary, but useful here</span>
+<span class="c1"># to show a table of them.)</span>
+<span class="c1"># ((Using a list and appending to it is also not the most efficient</span>
+<span class="c1"># way, but fine for this example.))</span>
+<span class="n">guesses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">solutions</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">guesses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+    <span class="n">blasius_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="p">)</span>
+<span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">guesses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+    <span class="n">blasius_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guesses</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="p">)</span>
+<span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1">#solutions.append(-1000) # doing this to kick off the while loop</span>
+<span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">solutions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-9</span><span class="p">:</span>    
+    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">guesses</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">guesses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">solutions</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">solutions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">guesses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">guesses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">solutions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+        <span class="n">blasius_rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">guesses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> 
+        <span class="n">max_step</span><span class="o">=</span><span class="mf">0.1</span>
+        <span class="p">)</span>
+    <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="c1"># we should probably set a maximum number of iterations, </span>
+    <span class="c1"># just to prevent an infinite while loop in case </span>
+    <span class="c1"># something goes wrong</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">1e4</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tries guesses  solutions&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">guesses</span><span class="p">,</span> <span class="n">solutions</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">idx</span><span class="si">:</span><span class="s1">3d</span><span class="si">}</span><span class="s1">   </span><span class="si">{</span><span class="n">g</span><span class="si">:</span><span class="s1">6.4f</span><span class="si">}</span><span class="s1">    </span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s1">6.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of iterations required: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">solutions</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tries guesses  solutions
+  0   1.0000    1.6552
+  1   0.1000    0.3566
+  2   0.5459    1.1056
+  3   0.4830    1.0190
+  4   0.4693    0.9995
+  5   0.4696    1.0000
+  6   0.4696    1.0000
+Number of iterations required: 7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\eta$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$f^{\prime}(\eta) = u/U_{\infty}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c7297327c389ad76d27bc05c17b4c3ad43006b6eb64b842aea2e09e381487cb8.png" src="../../_images/c7297327c389ad76d27bc05c17b4c3ad43006b6eb64b842aea2e09e381487cb8.png" />
+</div>
+</div>
+<p>We can see that this plot of <span class="math notranslate nohighlight">\(\eta\)</span>, the <span class="math notranslate nohighlight">\(y\)</span> position normalized by the boundary-layer thickness, vs. nondimensional velocity matches the original figure.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/bvps"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="boundary-value-problems.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Boundary Value Problems</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="finite-difference.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.2. </span>Finite difference method</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-linear-ode">3.1.1. Example: linear ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nonlinear-ode">3.1.2. Example: nonlinear ODE</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Surya
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text"><a rel="cc:attributionURL" property="dct:title" href="https://github.com/suryakantamangaraj/Mathematics">Mathematics Notes</a> by <span property="cc:attributionName">Surya Raj</span> is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" /></a></p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
