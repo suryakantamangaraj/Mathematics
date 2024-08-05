@@ -1,4 +1,4 @@
-name: me373-book
+name: mathematics
 channels:
   - conda-forge
 dependencies:
